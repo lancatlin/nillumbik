@@ -148,6 +148,20 @@ db-migrate-down: ## Run database migrations down (requires golang-migrate)
 		exit 1; \
 	fi
 
+.PHONY: db-migrate-create
+db-migrate-create: ## Create a new migration file (usage: make db-migrate-create name=migration_name)
+	@if [ -z "$(name)" ]; then \
+		printf "$(RED)Error: Migration name not provided. Usage: make db-migrate-create name=migration_name$(NC)\n"; \
+		exit 1; \
+	fi
+	@printf "$(GREEN)Creating new migration file: $(name)...$(NC)\n"
+	@if command -v migrate >/dev/null 2>&1; then \
+		cd $(BACKEND_DIR) && migrate create -ext sql -dir db/migrations -seq $(name); \
+	else \
+		printf "$(RED)golang-migrate not installed. Install from: https://github.com/golang-migrate/migrate$(NC)\n"; \
+		exit 1; \
+	fi
+
 # =============================================================================
 # Frontend (TypeScript) Commands
 # =============================================================================
