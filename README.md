@@ -22,6 +22,9 @@ make docker-up
 # Migrate database
 make db-migrate-up
 
+# Seed database with sample values
+make db-seed
+
 # Start development servers
 make dev
 ```

@@ -162,6 +162,10 @@ db-migrate-create: ## Create a new migration file (usage: make db-migrate-create
 		exit 1; \
 	fi
 
+.PHONY: db-seed
+db-seed:
+		docker compose -f $(DOCKER_COMPOSE_FILE) exec -T db psql $(POSTGRESQL_URL) < $(BACKEND_DIR)/db/seed.sql
+
 # =============================================================================
 # Frontend (TypeScript) Commands
 # =============================================================================
