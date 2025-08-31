@@ -9,6 +9,7 @@ import (
 
 	"github.com/lancatlin/nillumbik/internal/db"
 	"github.com/lancatlin/nillumbik/internal/site"
+	"github.com/lancatlin/nillumbik/internal/species"
 )
 
 func run() error {
@@ -24,6 +25,9 @@ func run() error {
 	r := gin.Default()
 	siteCtl := site.NewController(querier)
 	site.Register(r, &siteCtl)
+
+	speciesCtl := species.NewController(querier)
+	species.Register(r, &speciesCtl)
 
 	r.Run(":8000")
 	return nil

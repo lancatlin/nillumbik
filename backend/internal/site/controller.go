@@ -26,7 +26,7 @@ func (u *Controller) ListSites(c *gin.Context) {
 
 func (u *Controller) GetSiteByID(c *gin.Context) {
 	code := c.Param("code")
-	site, err := u.q.GetSite(c.Request.Context(), code)
+	site, err := u.q.GetSiteByCode(c.Request.Context(), code)
 	if err != nil {
 		c.JSON(400, gin.H{"message": "Author not found"})
 		return
