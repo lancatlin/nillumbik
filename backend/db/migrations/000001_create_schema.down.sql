@@ -9,6 +9,6 @@ DROP TYPE IF EXISTS forest_type;
 DROP TYPE IF EXISTS taxa;
 DROP TYPE IF EXISTS observation_method;
 
-DROP EXTENSION postgis;
+-- DROP EXTENSION postgis;
 
 COMMIT;

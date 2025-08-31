@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE EXTENSION postgis;
+-- CREATE EXTENSION postgis;
 
 CREATE TYPE tenure_type AS ENUM ('public', 'private');
 CREATE TYPE forest_type AS ENUM ('dry', 'wet');

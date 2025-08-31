@@ -2,7 +2,9 @@ services:
   db:
     image: postgis/postgis:17-3.5
     environment:
+      POSTGRES_USER: biom
       POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: nillumbik
     volumes:
       - ./db:/var/lib/postgresql/data
     ports:

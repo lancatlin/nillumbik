@@ -8,6 +8,7 @@ FRONTEND_DIR=frontend
 DOCKER_DIR=docker
 GO_MAIN=cmd/api/main.go
 DOCKER_COMPOSE_FILE=docker/docker-compose.yml
+POSTGRESQL_URL=postgres://biom:supersecretpassword@localhost:5432/nillumbik?sslmode=disable
 
 # Colors for output
 GREEN=\033[0;32m
@@ -131,7 +132,7 @@ sqlc-generate: ## Generate Go code from SQL using sqlc
 db-migrate-up: ## Run database migrations up (requires golang-migrate)
 	@printf "$(GREEN)Running database migrations up...$(NC)\n"
 	@if command -v migrate >/dev/null 2>&1; then \
-		cd $(BACKEND_DIR) && migrate -path db/migrations -database "postgres://postgres:supersecretpassword@localhost:5432/postgres?sslmode=disable" up; \
+		cd $(BACKEND_DIR) && migrate -path db/migrations -database $(POSTGRESQL_URL) up; \
 	else \
 		printf "$(RED)golang-migrate not installed. Install from: https://github.com/golang-migrate/migrate$(NC)\n"; \
 		exit 1; \
@@ -141,7 +142,7 @@ db-migrate-up: ## Run database migrations up (requires golang-migrate)
 db-migrate-down: ## Run database migrations down (requires golang-migrate)
 	@printf "$(YELLOW)Running database migrations down...$(NC)\n"
 	@if command -v migrate >/dev/null 2>&1; then \
-		cd $(BACKEND_DIR) && migrate -path db/migrations -database "postgres://postgres:supersecretpassword@localhost:5432/postgres?sslmode=disable" down; \
+		cd $(BACKEND_DIR) && migrate -path db/migrations -database $(POSTGRESQL_URL) down; \
 	else \
 		printf "$(RED)golang-migrate not installed. Install from: https://github.com/golang-migrate/migrate$(NC)\n"; \
 		exit 1; \
