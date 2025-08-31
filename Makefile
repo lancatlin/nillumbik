@@ -251,8 +251,9 @@ setup-dev: ## Setup development environment
 	@printf "$(GREEN)Setting up development environment...$(NC)\n"
 	@echo "Installing development tools..."
 	@printf "$(YELLOW)Recommended tools to install:$(NC)\n"
-	go install github.com/air-verse/air@latest
-	go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+	go install github.com/air-verse/air@v1.62.0
+	go install github.com/sqlc-dev/sqlc/cmd/sqlc@v1.29.0
+	go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@v4.19.0
 	@$(MAKE) install
 
 .PHONY: check
