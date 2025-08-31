@@ -4,8 +4,11 @@ VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 RETURNING *;
 
 -- name: GetObservation :one
-SELECT * FROM observations
-WHERE id = $1 LIMIT 1;
+SELECT sqlc.embed(s), sqlc.embed(sp), sqlc.embed(o)
+FROM observations o
+JOIN sites s ON o.site_id = s.id
+JOIN species sp ON o.species_id = sp.id
+WHERE o.id = $1 LIMIT 1;
 
 -- name: ListObservations :many
 SELECT sqlc.embed(s), sqlc.embed(sp), sqlc.embed(o)

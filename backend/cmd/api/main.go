@@ -8,6 +8,7 @@ import (
 	"github.com/jackc/pgx/v5"
 
 	"github.com/lancatlin/nillumbik/internal/db"
+	"github.com/lancatlin/nillumbik/internal/observation"
 	"github.com/lancatlin/nillumbik/internal/site"
 	"github.com/lancatlin/nillumbik/internal/species"
 )
@@ -28,6 +29,9 @@ func run() error {
 
 	speciesCtl := species.NewController(querier)
 	species.Register(r, &speciesCtl)
+
+	observationCtl := observation.NewController(querier)
+	observation.Register(r, &observationCtl)
 
 	r.Run(":8000")
 	return nil

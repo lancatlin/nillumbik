@@ -106,25 +106,46 @@ func (q *Queries) DeleteObservation(ctx context.Context, id int64) error {
 }
 
 const getObservation = `-- name: GetObservation :one
-SELECT id, site_id, species_id, timestamp, method, appearance_time, temperature, narrative, confidence, indicator, reportable FROM observations
-WHERE id = $1 LIMIT 1
+SELECT s.id, s.code, s.block, s.name, s.location, s.tenure, s.forest, sp.id, sp.scientific_name, sp.common_name, sp.native, sp.taxa, o.id, o.site_id, o.species_id, o.timestamp, o.method, o.appearance_time, o.temperature, o.narrative, o.confidence, o.indicator, o.reportable
+FROM observations o
+JOIN sites s ON o.site_id = s.id
+JOIN species sp ON o.species_id = sp.id
+WHERE o.id = $1 LIMIT 1
 `
 
-func (q *Queries) GetObservation(ctx context.Context, id int64) (Observation, error) {
+type GetObservationRow struct {
+	Site        Site        `json:"site"`
+	Species     Species     `json:"species"`
+	Observation Observation `json:"observation"`
+}
+
+func (q *Queries) GetObservation(ctx context.Context, id int64) (GetObservationRow, error) {
 	row := q.db.QueryRow(ctx, getObservation, id)
-	var i Observation
+	var i GetObservationRow
 	err := row.Scan(
-		&i.ID,
-		&i.SiteID,
-		&i.SpeciesID,
-		&i.Timestamp,
-		&i.Method,
-		&i.AppearanceTime,
-		&i.Temperature,
-		&i.Narrative,
-		&i.Confidence,
-		&i.Indicator,
-		&i.Reportable,
+		&i.Site.ID,
+		&i.Site.Code,
+		&i.Site.Block,
+		&i.Site.Name,
+		&i.Site.Location,
+		&i.Site.Tenure,
+		&i.Site.Forest,
+		&i.Species.ID,
+		&i.Species.ScientificName,
+		&i.Species.CommonName,
+		&i.Species.Native,
+		&i.Species.Taxa,
+		&i.Observation.ID,
+		&i.Observation.SiteID,
+		&i.Observation.SpeciesID,
+		&i.Observation.Timestamp,
+		&i.Observation.Method,
+		&i.Observation.AppearanceTime,
+		&i.Observation.Temperature,
+		&i.Observation.Narrative,
+		&i.Observation.Confidence,
+		&i.Observation.Indicator,
+		&i.Observation.Reportable,
 	)
 	return i, err
 }
