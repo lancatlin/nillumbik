@@ -11,11 +11,11 @@ import (
 
 const getSite = `-- name: GetSite :one
 SELECT id, code, block, name, location, tenure, forest FROM sites
-WHERE id = $1 LIMIT 1
+WHERE code = $1 LIMIT 1
 `
 
-func (q *Queries) GetSite(ctx context.Context, id int64) (Site, error) {
-	row := q.db.QueryRow(ctx, getSite, id)
+func (q *Queries) GetSite(ctx context.Context, code string) (Site, error) {
+	row := q.db.QueryRow(ctx, getSite, code)
 	var i Site
 	err := row.Scan(
 		&i.ID,

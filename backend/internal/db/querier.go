@@ -9,7 +9,7 @@ import (
 )
 
 type Querier interface {
-	GetSite(ctx context.Context, id int64) (Site, error)
+	GetSite(ctx context.Context, code string) (Site, error)
 	ListSites(ctx context.Context) ([]Site, error)
 }
 

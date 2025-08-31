@@ -7,14 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5"
 
-	"github.com/lancatlin/nillumbik/internal/author"
 	"github.com/lancatlin/nillumbik/internal/db"
+	"github.com/lancatlin/nillumbik/internal/site"
 )
 
 func run() error {
 	ctx := context.Background()
 
-	conn, err := pgx.Connect(ctx, "postgres://postgres:supersecretpassword@localhost:5432/nillumbik")
+	conn, err := pgx.Connect(ctx, "postgres://biom:supersecretpassword@localhost:5432/nillumbik")
 	if err != nil {
 		return err
 	}
@@ -22,8 +22,8 @@ func run() error {
 
 	querier := db.New(conn)
 	r := gin.Default()
-	authorCtl := author.NewController(querier)
-	author.Register(r, &authorCtl)
+	siteCtl := site.NewController(querier)
+	site.Register(r, &siteCtl)
 
 	r.Run(":8000")
 	return nil

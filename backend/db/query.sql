@@ -1,6 +1,6 @@
 -- name: GetSite :one
 SELECT * FROM sites
-WHERE id = $1 LIMIT 1;
+WHERE code = $1 LIMIT 1;
 
 -- name: ListSites :many
 SELECT * FROM sites
