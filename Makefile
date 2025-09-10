@@ -126,7 +126,7 @@ clean-backend: ## Clean Go build artifacts
 .PHONY: gen-doc
 gen-doc:
 	@printf "$(GREEN)Generating Swagger API Documents...$(NC)\n"
-	@cd $(BACKEND_DIR) && swag init -g cmd/api/main.go
+	@cd $(BACKEND_DIR) && swag fmt && swag init -g cmd/api/main.go
 
 # =============================================================================
 # Database Commands
