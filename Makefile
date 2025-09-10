@@ -123,6 +123,11 @@ clean-backend: ## Clean Go build artifacts
 	@rm -f $(BINARY_NAME)
 	@rm -f $(BACKEND_DIR)/coverage.out $(BACKEND_DIR)/coverage.html
 
+.PHONY: gen-doc
+gen-doc:
+	@printf "$(GREEN)Generating Swagger API Documents...$(NC)\n"
+	@cd $(BACKEND_DIR) && swag init -g cmd/api/main.go
+
 # =============================================================================
 # Database Commands
 # =============================================================================

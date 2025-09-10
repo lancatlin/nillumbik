@@ -17,6 +17,15 @@ func NewController(queries db.Querier) *Controller {
 	}
 }
 
+// ListSpecies godoc
+//
+//	@Summary		List species
+//	@Description	list all species
+//	@Tags			species
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	[]db.Species
+//	@Router			/species [get]
 func (u *Controller) ListSpecies(c *gin.Context) {
 	species, err := u.q.ListSpecies(c.Request.Context())
 	if err != nil {
