@@ -6,8 +6,7 @@ import { dumbData } from './constants/dumbData'
 const Dashboard: React.FC = (): JSX.Element => {
     return (
         <section>
-            Dashboard Page
-
+            <h1>Dashboard Page</h1>
             <LineChart />
         </section>
     )

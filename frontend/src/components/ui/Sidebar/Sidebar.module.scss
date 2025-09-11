@@ -1,10 +1,10 @@
 .navbar {
 	width: 80px;
-	height: 100vh;
+	height: 110vh;
 	padding: var(--mantine-spacing-md);
 	display: flex;
 	flex-direction: column;
-	background-color: var(--mantine-color-blue-filled);
+	background-color: #216869;
 }
 
 .navbarMain {
@@ -20,9 +20,11 @@
 	align-items: center;
 	justify-content: center;
 	color: var(--mantine-color-white);
+	margin: 20px auto;
 
 	&:hover {
-		background-color: var(--mantine-color-blue-7);
+		background-color: white;
+		color: #216869;
 	}
 
 	&[data-active] {
@@ -30,7 +32,7 @@
 		&:hover {
 			box-shadow: var(--mantine-shadow-sm);
 			background-color: var(--mantine-color-white);
-			color: var(--mantine-color-blue-6);
+			color: #216869;
 		}
 	}
 }
