@@ -8,11 +8,12 @@ import { NavLink, useNavigate } from "react-router";
 
 import routes from "../../../constants/route";
 
+
 const links = [
-	{ link: routes.HOME, label: "Home" },
 	{ link: routes.ABOUT, label: "About" },
 	{ link: routes.DASHBOARD, label: "Dashboard" },
 	{ link: routes.INSTRUCTION, label: "Community" },
+	//{ link: routes.USERS, label: "User Icon Here" }  //
 ];
 
 const Header: React.FC = (): JSX.Element => {
@@ -43,7 +44,10 @@ const Header: React.FC = (): JSX.Element => {
 				<img width={40} alt="BIOM Logo" src="https://planetopija.hr/media/W1siZiIsIjIwMjIvMTEvMTcvMndva3Y2b2dseV9CaW9tX2xvZ28ucG5nIl1d?sha=3f0b53e061c88d79" />
 				<Group gap={5} visibleFrom="xs">
 					{items}
+					<i className="fa-solid fa-user"></i>
+
 				</Group>
+
 
 				<Burger
 					opened={opened}
